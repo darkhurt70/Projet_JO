@@ -20,8 +20,11 @@
 
 <div class="container">
     <?php foreach ($listPersonnage as $perso): ?>
-        <?php $element = strtolower($perso->getElement()); ?>
-        <div class="card <?= $this->e($element); ?>">
+        <?php
+        $element = strtolower($perso->getElement());
+        $rarity = "rarity-" . intval($perso->getRarity());
+        ?>
+        <div class="card <?= $this->e($element); ?> <?= $this->e($rarity); ?>">
             <img src="<?= $this->e($perso->getUrlImg()); ?>" alt="<?= $this->e($perso->getName()); ?>">
             <div style="padding: 10px;">
                 <h4><?= $this->e($perso->getName()); ?></h4>
@@ -36,6 +39,7 @@
             </div>
         </div>
     <?php endforeach; ?>
+
 
 </div>
 

@@ -34,3 +34,12 @@
     height: 200px;
     object-fit: cover;
 }
+.rarity-4 {
+    border: 3px solid #a678f2; /* Violet */
+    box-shadow: 0 0 10px rgba(166, 120, 242, 0.5);
+}
+
+.rarity-5 {
+    border: 3px solid #f1c40f; /* Doré */
+    box-shadow: 0 0 15px rgba(241, 196, 15, 0.5);
+}
