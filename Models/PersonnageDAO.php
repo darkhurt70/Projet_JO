@@ -16,14 +16,7 @@ class PersonnageDAO extends BasePDODAO
         $personnages = [];
 
         while ($row = $stmt->fetch()) {
-            $p = new Personnage();
-            $p->setId($row['id']);
-            $p->setName($row['name']);
-            $p->setElement($row['element']);
-            $p->setUnitclass($row['unitclass']);
-            $p->setRarity((int)$row['rarity']);
-            $p->setOrigin($row['origin']);
-            $p->setUrlImg($row['url_img']);
+            $p = PersonnageService::hydrate($row);
             $personnages[] = $p;
         }
 
@@ -36,17 +29,6 @@ class PersonnageDAO extends BasePDODAO
         $stmt = $this->execRequest($sql, [$id]);
 
         $row = $stmt->fetch();
-        if (!$row) return null;
-
-        $p = new Personnage();
-        $p->setId($row['id']);
-        $p->setName($row['name']);
-        $p->setElement($row['element']);
-        $p->setUnitclass($row['unitclass']);
-        $p->setRarity((int)$row['rarity']);
-        $p->setOrigin($row['origin']);
-        $p->setUrlImg($row['url_img']);
-
-        return $p;
+        return $row ? PersonnageService::hydrate($row) : null;
     }
 }
