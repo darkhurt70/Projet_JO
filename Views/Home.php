@@ -20,7 +20,8 @@
 
 <div class="container">
     <?php foreach ($listPersonnage as $perso): ?>
-        <div class="card">
+        <?php $element = strtolower($perso->getElement()); ?>
+        <div class="card <?= $this->e($element); ?>">
             <img src="<?= $this->e($perso->getUrlImg()); ?>" alt="<?= $this->e($perso->getName()); ?>">
             <div style="padding: 10px;">
                 <h4><?= $this->e($perso->getName()); ?></h4>
@@ -35,5 +36,6 @@
             </div>
         </div>
     <?php endforeach; ?>
+
 </div>
 

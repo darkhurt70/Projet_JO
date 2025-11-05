@@ -12,10 +12,18 @@
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Couleurs des éléments */
+.electro   { border-color: #9b59b6; background-color: #f4effa; }
+.pyro      { border-color: #e74c3c; background-color: #fff0ee; }
+.hydro     { border-color: #3498db; background-color: #e8f6fc; }
+.cryo      { border-color: #5dade2; background-color: #eef9fc; }
+.anemo     { border-color: #2ecc71; background-color: #e9fdf0; }
+.geo       { border-color: #d4ac0d; background-color: #fffbe6; }
+.dendro    { border-color: #27ae60; background-color: #f0fff4; }
 .card:hover {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     transform: scale(1.02);
