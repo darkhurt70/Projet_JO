@@ -5,6 +5,7 @@ namespace Models;
 
 require_once 'BasePDODAO.php';
 require_once 'Personnage.php';
+use Services\PersonnageService;
 
 class PersonnageDAO extends BasePDODAO
 {

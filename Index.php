@@ -15,7 +15,11 @@ $loader->register();
 $loader->addNamespace('\Helpers', 'Helpers');
 $loader->addNamespace('\League\Plates', 'Vendor/Plates/src');
 $loader->addNamespace('\Controllers', 'Controllers');
-
+$loader->addNamespace('Models', __DIR__ . '/Models');
+$loader->addNamespace('Services', __DIR__ . '/Services');
+$loader->addNamespace('Controllers', __DIR__ . '/Controllers');
+$loader->addNamespace('Config', __DIR__ . '/Config');
+$loader->addNamespace('Exceptions', __DIR__ . '/Exceptions');
 // Controllers
 $controller = new MainController();
 $controller->index();

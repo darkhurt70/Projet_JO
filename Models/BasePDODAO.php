@@ -26,7 +26,7 @@ abstract class BasePDODAO {
         return $this->db;
     }
 
-    protected function execRequest(string $sql, array $params = null) {
+    protected function execRequest(string $sql, ?array $params = null) {
         $stmt = $this->getDB()->prepare($sql);
         $stmt->execute($params ?? []);
         return $stmt;
