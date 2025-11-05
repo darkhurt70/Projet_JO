@@ -21,12 +21,16 @@ $loader->addNamespace('Controllers', __DIR__ . '/Controllers');
 $loader->addNamespace('Config', __DIR__ . '/Config');
 $loader->addNamespace('Exceptions', __DIR__ . '/Exceptions');
 // Controllers
-$controller = new MainController();
-$controller->index();
+//$controller = new MainController();
+//$controller->index();
 
 // Instancier le moteur de templates
-$templates = new League\Plates\Engine(__DIR__ . '/Views');
+//$templates = new League\Plates\Engine(__DIR__ . '/Views');
 
 // Afficher la vue
 //echo $templates->render('home', ['gameName' => 'Genshin Impact']);
 
+use Controllers\Router\Router;
+
+$router = new Router();
+$router->routing($_GET, $_POST);

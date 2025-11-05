@@ -28,8 +28,8 @@
 
                     <!-- Actions -->
                     <div style="margin-top: 10px;">
-                        <a href="?route=edit&id=<?= $perso->getId(); ?>" title="Modifier">✏️</a>
-                        <a href="?route=delete&id=<?= $perso->getId(); ?>" title="Supprimer">🗑️</a>
+                        <a href="index.php?action=edit-perso&id=<?= $perso->getId(); ?>">✏️</a>
+                        <a href="index.php?action=del-perso&id=<?= $perso->getId(); ?>">🗑️</a>
                     </div>
                 </div>
             </div>

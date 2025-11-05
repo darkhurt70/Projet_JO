@@ -9,10 +9,17 @@
 </head>
 <body>
 <header>
-    <!-- Menu -->
     <nav>
+        <ul style="display: flex; gap: 10px; list-style: none;">
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="index.php?action=add-perso">Ajouter un perso</a></li>
+            <li><a href="index.php?action=add-perso-element">Ajouter un élément</a></li>
+            <li><a href="index.php?action=logs">Logs</a></li>
+            <li><a href="index.php?action=login">Connexion</a></li>
+        </ul>
     </nav>
 </header>
+
 <!-- #contenu -->
 <main id="contenu">
     <?=$this->section('content')?>
