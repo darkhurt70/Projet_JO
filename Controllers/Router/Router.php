@@ -4,8 +4,14 @@ namespace Controllers\Router;
 use Controllers\MainController;
 use Controllers\PersoController;
 
+use Controllers\Router\Route\RouteAddElement;
 use Controllers\Router\Route\RouteIndex;
 use Controllers\Router\Route\RouteAddPerso;
+use Controllers\Router\Route\RouteLogs;
+use Controllers\Router\Route\RouteLogin;
+use Controllers\Router\Route\RouteDelPerso;
+use Controllers\Router\Route\RouteEditPerso;
+
 
 
 class Router
@@ -32,6 +38,14 @@ class Router
     {
         $this->routeList["index"] = new RouteIndex($this->ctrlList["main"]);
         $this->routeList["add-perso"] = new RouteAddPerso($this->ctrlList["perso"]);
+        $this->routeList["logs"] = new RouteLogs($this->ctrlList["main"]);
+        $this->routeList["add-perso-element"] = new RouteAddElement($this->ctrlList["perso"]);
+        $this->routeList["login"] = new RouteLogin($this->ctrlList["main"]);
+        $this->routeList["del-perso"] = new RouteDelPerso($this->ctrlList["perso"]);
+        $this->routeList["edit-perso"] = new RouteEditPerso($this->ctrlList["perso"]);
+
+
+
     }
 
     public function routing(array $get, array $post): void

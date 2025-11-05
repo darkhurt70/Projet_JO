@@ -26,4 +26,19 @@ class MainController
             'other' => $other
         ]);
     }
+
+    public function displayLogs(): void
+    {
+        echo $this->templates->render('logs');
+    }
+
+
+    public function displayLogin(): void
+    {
+        echo $this->templates->render('login');
+    }
+
+
+
+
 }

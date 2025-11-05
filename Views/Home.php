@@ -11,6 +11,10 @@
 <!--</pre>-->
 
 <?php $this->layout('template', ['title' => 'TP Mihoyo']) ?>
+<?php if (!empty($message)) : ?>
+    <div class="alert"><?= $this->e($message); ?></div>
+<?php endif; ?>
+
 
 <h1>Collection <?= $this->e($gameName) ?></h1>
 
