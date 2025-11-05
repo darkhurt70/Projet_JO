@@ -19,11 +19,11 @@
 /* Couleurs des éléments */
 .electro   { border-color: #9b59b6; background-color: #f4effa; }
 .pyro      { border-color: #e74c3c; background-color: #fff0ee; }
-.hydro     { border-color: #3498db; background-color: #e8f6fc; }
+.hydro     { border-color: #1f6899; background-color: #e8efff; }
 .cryo      { border-color: #5dade2; background-color: #eef9fc; }
 .anemo     { border-color: #2ecc71; background-color: #e9fdf0; }
 .geo       { border-color: #d4ac0d; background-color: #fffbe6; }
-.dendro    { border-color: #27ae60; background-color: #f0fff4; }
+.dendro    { border-color: #197841; background-color: #d3ffd3; }
 .card:hover {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     transform: scale(1.02);
