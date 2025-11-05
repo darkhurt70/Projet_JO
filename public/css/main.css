@@ -1,0 +1,21 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transform: scale(1.02);
+    transition: 0.2s;
+}
+
+img {
+    object-fit: cover;
+}
