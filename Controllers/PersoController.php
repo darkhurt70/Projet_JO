@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\Personnage;
 use League\Plates\Engine;
 
 class PersoController
@@ -13,10 +14,13 @@ class PersoController
         $this->templates = new Engine(__DIR__ . '/../Views');
     }
 
-    public function displayAddPerso(): void
+    public function displayAddPerso(?string $message = null): void
     {
-        echo $this->templates->render('add-perso');
+        echo $this->templates->render('add-perso', [
+            'message' => $message
+        ]);
     }
+
 
     public function displayAddElement(): void
     {
@@ -39,5 +43,41 @@ class PersoController
         header("Location: index.php?action=add-perso&id=" . urlencode($id));
         exit;
     }
+
+
+    public function addPerso(array $data): void
+    {
+        try {
+
+            $id = uniqid();
+
+            $personnage = new Personnage();
+
+            $personnage->setId($id);
+            $personnage->setName($data['name']);
+            $personnage->setElement($data['element']);
+            $personnage->setUnitclass($data['unitclass']);
+            $personnage->setRarity((int)$data['rarity']);
+            $personnage->setOrigin($data['origin']);
+            $personnage->setUrlImg($data['url_img']);
+
+
+            $dao = new \Models\PersonnageDAO();
+            $dao->createPersonnage($personnage); // méthode à créer en 1.5
+
+            // 4. Message + affichage
+            echo $this->templates->render('home', [
+                'message' => "Personnage ajouté avec succès ✅",
+                'listPersonnage' => $dao->getAll()
+            ]);
+
+        } catch (\Exception $e) {
+            echo $this->templates->render('add-perso', [
+                'message' => "Erreur : " . $e->getMessage()
+            ]);
+        }
+    }
+
+
 
 }

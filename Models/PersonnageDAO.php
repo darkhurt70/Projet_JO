@@ -7,8 +7,11 @@ require_once 'BasePDODAO.php';
 require_once 'Personnage.php';
 use Services\PersonnageService;
 
+
+
 class PersonnageDAO extends BasePDODAO
 {
+
 
     public function getAll(): array
     {
@@ -32,4 +35,25 @@ class PersonnageDAO extends BasePDODAO
         $row = $stmt->fetch();
         return $row ? PersonnageService::hydrate($row) : null;
     }
+
+    public function createPersonnage(Personnage $personnage): void
+    {
+        $sql = "INSERT INTO personnage (id, name, element, origin, unitclass, rarity, url_img)
+            VALUES (:id, :name, :element, :origin, :unitclass, :rarity, :url_img)";
+
+        $params = [
+            "id"        => $personnage->getId(),
+            "name"      => $personnage->getName(),
+            "element"   => $personnage->getElement(),
+            "origin"    => $personnage->getOrigin(),
+            "unitclass" => $personnage->getUnitclass(),
+            "rarity"    => $personnage->getRarity(),
+            "url_img"   => $personnage->getUrlImg(),
+        ];
+
+        $this->execRequest($sql, $params);
+    }
+
+
+
 }

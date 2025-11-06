@@ -2,13 +2,14 @@
 
 namespace Models;
 
-class Personnage {
-    private ?string $id;
+class Personnage
+{
+    private string $id;
     private string $name;
     private string $element;
+    private string $origin;
     private string $unitclass;
     private int $rarity;
-    private ?string $origin;
     private string $urlImg;
 
     // Getters
@@ -21,7 +22,7 @@ class Personnage {
     public function getUrlImg(): string { return $this->urlImg; }
 
     // Setters
-    public function setId(?string $id): void { $this->id = $id; }
+    public function setId(string $id): void { $this->id = $id; }
     public function setName(string $name): void { $this->name = $name; }
     public function setElement(string $element): void { $this->element = $element; }
     public function setUnitclass(string $unitclass): void { $this->unitclass = $unitclass; }
