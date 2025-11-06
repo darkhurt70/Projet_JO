@@ -28,14 +28,20 @@ class PersoController
     }
     public function deletePerso(string $id): void
     {
-        // TODO: faire la suppression réelle
-        $message = "Le personnage avec l'ID $id a été supprimé.";
+        $dao = new \Models\PersonnageDAO();
+        $success = $dao->deletePerso($id);
+
+        $message = $success
+            ? "Le personnage avec l'ID $id a été supprimé ✅"
+            : "❌ Aucun personnage avec l'ID $id n’a été trouvé.";
+
         echo $this->templates->render('home', [
             'gameName' => 'Genshin Impact',
-            'listPersonnage' => [], // à remplacer plus tard par $dao->getAll()
+            'listPersonnage' => $dao->getAll(),
             'message' => $message
         ]);
     }
+
 
     public function redirectToEdit(string $id): void
     {
@@ -77,6 +83,27 @@ class PersoController
             ]);
         }
     }
+
+    public function deletePersoAndIndex(?string $id = null): void
+    {
+        $dao = new \Models\PersonnageDAO();
+        $message = "";
+
+        if ($id !== null) {
+            $success = $dao->deletePerso($id);
+            $message = $success
+                ? "Personnage supprimé avec succès ✅"
+                : "Erreur : aucun personnage trouvé avec cet ID.";
+        } else {
+            $message = "Erreur : aucun identifiant fourni.";
+        }
+
+        echo $this->templates->render('home', [
+            'message' => $message,
+            'listPersonnage' => $dao->getAll()
+        ]);
+    }
+
 
 
 

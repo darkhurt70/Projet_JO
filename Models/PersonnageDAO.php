@@ -54,6 +54,14 @@ class PersonnageDAO extends BasePDODAO
         $this->execRequest($sql, $params);
     }
 
+    public function deletePerso(string $idPerso): bool
+    {
+        $sql = "DELETE FROM personnage WHERE id = :id";
+        $stmt = $this->execRequest($sql, ["id" => $idPerso]);
+        return $stmt->rowCount() > 0;
+    }
+
+
 
 
 }

@@ -34,7 +34,10 @@
                 <p>Rareté : <?= $this->e($perso->getRarity()); ?>★</p>
                 <div style="margin-top: 10px;">
                     <a href="index.php?action=edit-perso&id=<?= $perso->getId(); ?>">✏️</a>
-                    <a href="index.php?action=del-perso&id=<?= $perso->getId(); ?>">🗑️</a>
+                    <a href="index.php?action=del-perso&id=<?=$perso->getId(); ?>" class="delete-btn">
+                        🗑️
+                    </a>
+
                 </div>
             </div>
         </div>
