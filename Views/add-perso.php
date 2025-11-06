@@ -13,7 +13,7 @@ $this->layout('template', [
     <div class="alert"><?= $this->e($message); ?></div>
 <?php endif; ?>
 
-<form method="post" action="index.php?action=add-perso" class="form-container">
+<form method="post" action="index.php?action=add-perso" class="form-genshin">
 
     <label for="nom">Nom :</label>
     <input type="text" name="perso-nom" id="nom" required>
