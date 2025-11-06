@@ -109,7 +109,7 @@ class PersoController
         $dao = new \Models\PersonnageDAO();
         $perso = $id ? $dao->getByID($id) : null;
 
-        echo $this->templates->render('add-perso', [
+        echo $this->templates->render('edit-perso', [
             'message' => $message,
             'perso'   => $perso
         ]);
@@ -117,12 +117,23 @@ class PersoController
 
     public function editPersoAndIndex(array $data): void
     {
+        echo "test";
         $dao = new \Models\PersonnageDAO();
-        $personnage = new \Models\Personnage($data); // hydrate avec setters
+
+        $personnage = new Personnage();
+        $personnage->setId($data['id']);
+        $personnage->setName($data['name']);
+        $personnage->setElement($data['element']);
+        $personnage->setUnitclass($data['unitclass']);
+        $personnage->setRarity((int)$data['rarity']);
+        $personnage->setOrigin($data['origin']);
+        $personnage->setUrlImg($data['url_img']);
+
         $dao->updatePersonnage($personnage);
 
         echo $this->templates->render('home', [
             'listPersonnage' => $dao->getAll(),
+            'gameName' => 'Genshin Impact',
             'message' => "✅ Personnage mis à jour avec succès !"
         ]);
     }

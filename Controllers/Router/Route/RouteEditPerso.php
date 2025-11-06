@@ -27,9 +27,10 @@ class RouteEditPerso extends Route
 
     public function post(array $params = []): void
     {
+        echo "test";
         try {
             $data = [
-                "id"        => parent::getParam($params, "perso-id", false),
+                "id"        => parent::getParam($params, "id", false),
                 "name"      => parent::getParam($params, "perso-nom", false),
                 "element"   => parent::getParam($params, "perso-element", false),
                 "origin"    => parent::getParam($params, "perso-origin", false),
