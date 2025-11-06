@@ -14,6 +14,11 @@
 <?php if (!empty($message)) : ?>
     <div class="alert"><?= $this->e($message); ?></div>
 <?php endif; ?>
+<?php
+if (isset($_GET['message']) && $_GET['message'] === 'update-success') {
+    echo '<div class="alert">✅ Personnage mis à jour avec succès</div>';
+}
+?>
 
 
 <h1>Collection <?= $this->e($gameName) ?></h1>

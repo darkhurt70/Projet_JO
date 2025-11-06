@@ -61,6 +61,31 @@ class PersonnageDAO extends BasePDODAO
         return $stmt->rowCount() > 0;
     }
 
+    public function updatePersonnage(Personnage $personnage): void
+    {
+        $sql = "UPDATE personnage SET 
+                name = :name, 
+                element = :element, 
+                origin = :origin, 
+                unitclass = :unitclass, 
+                rarity = :rarity, 
+                url_img = :url_img
+            WHERE id = :id";
+
+        $params = [
+            "id"        => $personnage->getId(),
+            "name"      => $personnage->getName(),
+            "element"   => $personnage->getElement(),
+            "origin"    => $personnage->getOrigin(),
+            "unitclass" => $personnage->getUnitclass(),
+            "rarity"    => $personnage->getRarity(),
+            "url_img"   => $personnage->getUrlImg(),
+        ];
+
+        $this->execRequest($sql, $params);
+    }
+
+
 
 
 

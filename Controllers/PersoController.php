@@ -104,6 +104,30 @@ class PersoController
         ]);
     }
 
+    public function displayEditPerso(?string $id = null, ?string $message = null): void
+    {
+        $dao = new \Models\PersonnageDAO();
+        $perso = $id ? $dao->getByID($id) : null;
+
+        echo $this->templates->render('add-perso', [
+            'message' => $message,
+            'perso'   => $perso
+        ]);
+    }
+
+    public function editPersoAndIndex(array $data): void
+    {
+        $dao = new \Models\PersonnageDAO();
+        $personnage = new \Models\Personnage($data); // hydrate avec setters
+        $dao->updatePersonnage($personnage);
+
+        echo $this->templates->render('home', [
+            'listPersonnage' => $dao->getAll(),
+            'message' => "✅ Personnage mis à jour avec succès !"
+        ]);
+    }
+
+
 
 
 
