@@ -1,10 +1,13 @@
 <?php
-$this->layout('layout', [
-        'title' => 'Ajouter un nouveau personnage'
+$this->layout('template', [
+        'title' => 'Ajouter un nouveau personnage',
+        'gameName' => 'Ajouter un nouveau personnage'
 ]);
+
+
 ?>
 
-<h2>Ajouter un nouveau personnage</h2>
+
 
 <?php if (!empty($message)): ?>
     <div class="alert"><?= $this->e($message); ?></div>
@@ -31,5 +34,5 @@ $this->layout('layout', [
     <input type="url" name="perso-url" id="url" required>
 
     <br><br>
-    <button type="submit">Ajouter le personnage</button>
+    <button type="submit" class="btn-genshin">Ajouter le personnage</button>
 </form>

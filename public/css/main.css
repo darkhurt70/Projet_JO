@@ -6,40 +6,235 @@
     padding: 20px;
 }
 
+body {
+    font-family: 'Cardo', serif;
+    background: url('https://wallpaper.forfun.com/fetch/f7/f780ae88a566c73d99921869b3fee5fc.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+}
+
 .card {
     width: 250px;
-    background-color: white;
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid #ccc;
     transition: 0.2s ease-in-out;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding-bottom: 10px;
 }
 
-/* Couleurs des éléments */
-.electro   { border-color: #9b59b6; background-color: #f4effa; }
-.pyro      { border-color: #e74c3c; background-color: #fff0ee; }
-.hydro     { border-color: #1f6899; background-color: #e8efff; }
-.cryo      { border-color: #5dade2; background-color: #eef9fc; }
-.anemo     { border-color: #2ecc71; background-color: #e9fdf0; }
-.geo       { border-color: #d4ac0d; background-color: #fffbe6; }
-.dendro    { border-color: #197841; background-color: #d3ffd3; }
+.card::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+/* Couleurs des éléments avec dégradés */
+.electro {
+    background-image: linear-gradient(to bottom, #f4effa, #e0d4f2);
+    border-color: #9b59b6;
+}
+.pyro {
+    background-image: linear-gradient(to bottom, #fff0ee, #ffd6cf);
+    border-color: #e74c3c;
+}
+.hydro {
+    background-image: linear-gradient(to bottom, #e8efff, #cfe0ff);
+    border-color: #1f6899;
+}
+.cryo {
+    background-image: linear-gradient(to bottom, #eef9fc, #d1f0f8);
+    border-color: #5dade2;
+}
+.anemo {
+    background-image: linear-gradient(to bottom, #e9fdf0, #c7f7da);
+    border-color: #2ecc71;
+}
+.geo {
+    background-image: linear-gradient(to bottom, #fffbe6, #fce9b0);
+    border-color: #d4ac0d;
+}
+.dendro {
+    background-image: linear-gradient(to bottom, #d3ffd3, #b3f2b3);
+    border-color: #197841;
+}
+
+/* Hover */
 .card:hover {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     transform: scale(1.02);
 }
 
+/* Image */
 .card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
+
+/* Rarety : uniquement le contour et l'aura */
 .rarity-4 {
-    border: 3px solid #a678f2; /* Violet */
-    box-shadow: 0 0 10px rgba(166, 120, 242, 0.5);
+    outline: 3px solid #a678f2;
+    outline-offset: -3px;
+    box-shadow: 0 0 20px rgba(166, 120, 242, 0.4);
 }
 
 .rarity-5 {
-    border: 3px solid #f1c40f; /* Doré */
-    box-shadow: 0 0 15px rgba(241, 196, 15, 0.5);
+    outline: 3px solid #f1c40f;
+    outline-offset: -3px;
+    box-shadow: 0 0 25px rgba(241, 196, 15, 0.6);
 }
+
+/* Titre */
+.card .title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 15px 0 10px;
+    padding: 5px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+}
+nav ul {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    justify-content: center;
+    padding: 20px;
+    margin: 0;
+    background: linear-gradient(to right, #e9fdf0, #d2f7e0, #e9fdf0); /* Anémo pastel */
+    border-bottom: 2px solid #2ecc71; /* Vert vif Anémo */
+    box-shadow: 0 2px 8px rgba(0, 100, 50, 0.05);
+    border-radius: 0 0 12px 12px;
+    position: relative;
+}
+
+
+nav ul li a {
+    display: inline-block;
+    font-family: 'Cardo', serif;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 18px;
+    border: 2px solid #f1c40f;
+    border-radius: 8px;
+    background: linear-gradient(to right, #fff8dc, #f9e79f);
+    box-shadow: 0 0 10px rgba(241, 196, 15, 0.3);
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background: linear-gradient(to right, #ffeaa7, #f6e58d);
+    box-shadow: 0 0 15px rgba(255, 223, 0, 0.6);
+    transform: scale(1.05);
+    color: #6e5600;
+}
+
+.site-title {
+    font-family: 'Cardo', serif;
+    font-size: 28px;
+    color: #2ecc71;
+    margin: 0 0 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    border-bottom: 1px dashed #2ecc71;
+    padding-bottom: 5px;
+}
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to right, #e9fdf0, #d2f7e0, #e9fdf0);
+    border-bottom: 2px solid #2ecc71;
+    box-shadow: 0 2px 8px rgba(0, 100, 50, 0.05);
+    border-radius: 0 0 12px 12px;
+    padding: 10px 20px;
+}
+/* Titre Genshin */
+.genshin-title {
+    font-family: 'Cardo', serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: #2ecc71;
+    text-align: center;
+    margin: 40px 0 20px;
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    padding-bottom: 10px;
+}
+
+.genshin-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    margin: 10px auto 0;
+    background: linear-gradient(to right, transparent, #2ecc71, transparent);
+    border-radius: 2px;
+}
+
+/* Formulaire */
+.form-genshin {
+    max-width: 500px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-genshin label {
+    font-family: 'Cardo', serif;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.form-genshin input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Cardo', serif;
+    background-color: #f9fdfb;
+    transition: border-color 0.3s;
+}
+
+.form-genshin input:focus {
+    border-color: #2ecc71;
+    outline: none;
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+}
+
+/* Bouton magique */
+.btn-genshin {
+    padding: 12px 20px;
+    background: linear-gradient(to right, #fff8dc, #f9e79f);
+    color: #6e5600;
+    border: 2px solid #f1c40f;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Cardo', serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(241, 196, 15, 0.3);
+    margin-top: 15px;
+}
+
+.btn-genshin:hover {
+    background: linear-gradient(to right, #ffeaa7, #f6e58d);
+    box-shadow: 0 0 15px rgba(255, 223, 0, 0.6);
+    transform: scale(1.03);
+}
+
+
+

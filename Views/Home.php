@@ -1,16 +1,6 @@
-<?php
-//$this->layout('template', ['title' => 'TP Mihoyo']);
-//?>
-<!--<h1>Collection --><?php //= $this->e($gameName) ?><!--</h1>-->
-<!---->
-<!--<h2>Affichage brut (debug)</h2>-->
-<!--<pre>-->
-<?php //var_dump($listPersonnage); ?>
-<?php //var_dump($first); ?>
-<?php //var_dump($other); ?>
-<!--</pre>-->
 
-<?php $this->layout('template', ['title' => 'TP Mihoyo']) ?>
+
+<?php $this->layout('template', ['title' => 'Gensin Collection','gameName' => $gameName]) ?>
 <?php if (!empty($message)) : ?>
     <div class="alert"><?= $this->e($message); ?></div>
 <?php endif; ?>
@@ -21,7 +11,6 @@ if (isset($_GET['message']) && $_GET['message'] === 'update-success') {
 ?>
 
 
-<h1>Collection <?= $this->e($gameName) ?></h1>
 
 <div class="container">
     <?php foreach ($listPersonnage as $perso): ?>
