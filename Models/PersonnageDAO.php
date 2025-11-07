@@ -19,40 +19,43 @@ class PersonnageDAO extends BasePDODAO
         $stmt = $this->execRequest($sql);
         $personnages = [];
 
+        $elementDAO = new ElementDAO();
+        $originDAO = new OriginDAO();
+        $unitDAO = new UnitClassDAO();
+
         while ($row = $stmt->fetch()) {
-            $p = PersonnageService::hydrate($row);
+
+            $element = $elementDAO->getById($row['element']);
+            $origin = $originDAO->getById($row['origin']);
+            $unit = $unitDAO->getById($row['unitclass']);
+
+            $p = PersonnageService::hydrate($row, $element, $origin, $unit);
             $personnages[] = $p;
         }
 
         return $personnages;
     }
 
+
     public function getByID(string $id): ?Personnage
     {
         $sql = "SELECT * FROM personnage WHERE id = ?";
         $stmt = $this->execRequest($sql, [$id]);
-
         $row = $stmt->fetch();
-        return $row ? PersonnageService::hydrate($row) : null;
+
+        if (!$row) return null;
+
+        $elementDAO = new ElementDAO();
+        $originDAO = new OriginDAO();
+        $unitDAO = new UnitClassDAO();
+
+        $element = $elementDAO->getById($row['element']);
+        $origin = $originDAO->getById($row['origin']);
+        $unit = $unitDAO->getById($row['unitclass']);
+
+        return PersonnageService::hydrate($row, $element, $origin, $unit);
     }
 
-    public function createPersonnage(Personnage $personnage): void
-    {
-        $sql = "INSERT INTO personnage (id, name, element, origin, unitclass, rarity, url_img)
-            VALUES (:id, :name, :element, :origin, :unitclass, :rarity, :url_img)";
-
-        $params = [
-            "id"        => $personnage->getId(),
-            "name"      => $personnage->getName(),
-            "element"   => $personnage->getElement(),
-            "origin"    => $personnage->getOrigin(),
-            "unitclass" => $personnage->getUnitclass(),
-            "rarity"    => $personnage->getRarity(),
-            "url_img"   => $personnage->getUrlImg(),
-        ];
-
-        $this->execRequest($sql, $params);
-    }
 
     public function deletePerso(string $idPerso): bool
     {
@@ -75,15 +78,34 @@ class PersonnageDAO extends BasePDODAO
         $params = [
             "id"        => $personnage->getId(),
             "name"      => $personnage->getName(),
-            "element"   => $personnage->getElement(),
-            "origin"    => $personnage->getOrigin(),
-            "unitclass" => $personnage->getUnitclass(),
+            "element"   => $personnage->getElement()->getId(),
+            "origin"    => $personnage->getOrigin()->getId(),
+            "unitclass" => $personnage->getUnitclass()->getId(),
             "rarity"    => $personnage->getRarity(),
             "url_img"   => $personnage->getUrlImg(),
         ];
 
         $this->execRequest($sql, $params);
     }
+
+    public function createPersonnage(Personnage $personnage): void
+    {
+        $sql = "INSERT INTO personnage (id, name, element, origin, unitclass, rarity, url_img)
+            VALUES (:id, :name, :element, :origin, :unitclass, :rarity, :url_img)";
+
+        $params = [
+            "id"        => $personnage->getId(),
+            "name"      => $personnage->getName(),
+            "element"   => $personnage->getElement()->getId(),
+            "origin"    => $personnage->getOrigin()->getId(),
+            "unitclass" => $personnage->getUnitclass()->getId(),
+            "rarity"    => $personnage->getRarity(),
+            "url_img"   => $personnage->getUrlImg()
+        ];
+
+        $this->execRequest($sql, $params);
+    }
+
 
 
 

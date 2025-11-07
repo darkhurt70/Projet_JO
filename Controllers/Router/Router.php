@@ -3,6 +3,7 @@ namespace Controllers\Router;
 
 use Controllers\MainController;
 use Controllers\PersoController;
+use Controllers\AttributController;
 
 use Controllers\Router\Route\RouteAddElement;
 use Controllers\Router\Route\RouteIndex;
@@ -11,6 +12,9 @@ use Controllers\Router\Route\RouteLogs;
 use Controllers\Router\Route\RouteLogin;
 use Controllers\Router\Route\RouteDelPerso;
 use Controllers\Router\Route\RouteEditPerso;
+use Controllers\Router\Route\RouteAddAttribute;
+
+
 
 
 
@@ -31,6 +35,7 @@ class Router
     {
         $this->ctrlList["main"] = new MainController();
         $this->ctrlList["perso"] = new PersoController();
+        $this->ctrlList["attribut"] = new AttributController();
 
     }
 
@@ -43,6 +48,7 @@ class Router
         $this->routeList["login"] = new RouteLogin($this->ctrlList["main"]);
         $this->routeList["del-perso"] = new RouteDelPerso($this->ctrlList["perso"]);
         $this->routeList["edit-perso"] = new RouteEditPerso($this->ctrlList["perso"]);
+        $this->routeList["add-attribute"] = new RouteAddAttribute($this->ctrlList["attribut"]);
 
 
 
