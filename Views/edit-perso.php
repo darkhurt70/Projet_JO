@@ -1,6 +1,6 @@
 <?php
 $this->layout('layout', [
-    'title' => 'Modifier le personnage : '
+        'title' => 'Modifier le personnage : ' . $perso->getName()
 ]);
 
 if (!isset($perso)) {
@@ -25,16 +25,34 @@ if (!isset($perso)) {
            value="<?= $this->e($perso->getName()) ?>">
 
     <label for="element">Élément :</label>
-    <input type="text" name="perso-element" id="element" required
-           value="<?= $this->e($perso->getElement()) ?>">
+    <select name="perso-element" id="element" required>
+        <?php foreach ($listElements as $el): ?>
+            <option value="<?= $el->getId() ?>"
+                    <?= $el->getId() === $perso->getElement()->getId() ? 'selected' : '' ?>>
+                <?= $this->e($el->getName()) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
 
     <label for="origin">Origine :</label>
-    <input type="text" name="perso-origin" id="origin" required
-           value="<?= $this->e($perso->getOrigin()) ?>">
+    <select name="perso-origin" id="origin" required>
+        <?php foreach ($listOrigins as $or): ?>
+            <option value="<?= $or->getId() ?>"
+                    <?= $or->getId() === $perso->getOrigin()->getId() ? 'selected' : '' ?>>
+                <?= $this->e($or->getName()) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
 
     <label for="class">Classe :</label>
-    <input type="text" name="perso-class" id="class" required
-           value="<?= $this->e($perso->getUnitclass()) ?>">
+    <select name="perso-class" id="class" required>
+        <?php foreach ($listUnitClasses as $uc): ?>
+            <option value="<?= $uc->getId() ?>"
+                    <?= $uc->getId() === $perso->getUnitclass()->getId() ? 'selected' : '' ?>>
+                <?= $this->e($uc->getName()) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
 
     <label for="rarity">Rareté (4 ou 5) :</label>
     <input type="number" name="perso-rarity" id="rarity" min="4" max="5" required
@@ -45,5 +63,5 @@ if (!isset($perso)) {
            value="<?= $this->e($perso->getUrlImg()) ?>">
 
     <br><br>
-    <button type="submit">Mettre à jour le personnage</button>
+    <button type="submit">✅ Mettre à jour</button>
 </form>

@@ -16,8 +16,15 @@ class PersoController
 
     public function displayAddPerso(?string $message = null): void
     {
+        $elementDAO = new \Models\ElementDAO();
+        $originDAO = new \Models\OriginDAO();
+        $unitclassDAO = new \Models\UnitClassDAO();
+
         echo $this->templates->render('add-perso', [
-            'message' => $message
+            'message' => $message,
+            'listElements' => $elementDAO->getAll(),
+            'listOrigins' => $originDAO->getAll(),
+            'listUnitClasses' => $unitclassDAO->getAll()
         ]);
     }
 
@@ -56,20 +63,23 @@ class PersoController
         try {
 
             $id = uniqid();
+            $element = (new \Models\ElementDAO())->getByID($data['element']);
+            $origin = (new \Models\OriginDAO())->getByID($data['origin']);
+            $unit = (new \Models\UnitClassDAO())->getByID($data['unitclass']);
 
             $personnage = new Personnage();
 
             $personnage->setId($id);
             $personnage->setName($data['name']);
-            $personnage->setElement($data['element']);
-            $personnage->setUnitclass($data['unitclass']);
+            $personnage->setElement($element);
+            $personnage->setOrigin($origin);
+            $personnage->setUnitclass($unit);
             $personnage->setRarity((int)$data['rarity']);
-            $personnage->setOrigin($data['origin']);
             $personnage->setUrlImg($data['url_img']);
 
 
             $dao = new \Models\PersonnageDAO();
-            $dao->createPersonnage($personnage); // méthode à créer en 1.5
+            $dao->createPersonnage($personnage);
 
             // 4. Message + affichage
             echo $this->templates->render('home', [
@@ -108,25 +118,33 @@ class PersoController
     {
         $dao = new \Models\PersonnageDAO();
         $perso = $id ? $dao->getByID($id) : null;
+        $elementDAO = new \Models\ElementDAO();
+        $originDAO = new \Models\OriginDAO();
+        $unitclassDAO = new \Models\UnitClassDAO();
 
         echo $this->templates->render('edit-perso', [
             'message' => $message,
-            'perso'   => $perso
+            'perso' => $perso,
+            'listElements' => $elementDAO->getAll(),
+            'listOrigins' => $originDAO->getAll(),
+            'listUnitClasses' => $unitclassDAO->getAll()
         ]);
     }
 
     public function editPersoAndIndex(array $data): void
     {
-        echo "test";
         $dao = new \Models\PersonnageDAO();
+        $element = (new \Models\ElementDAO())->getByID($data['element']);
+        $origin = (new \Models\OriginDAO())->getByID($data['origin']);
+        $unit = (new \Models\UnitClassDAO())->getByID($data['unitclass']);
 
         $personnage = new Personnage();
         $personnage->setId($data['id']);
         $personnage->setName($data['name']);
-        $personnage->setElement($data['element']);
-        $personnage->setUnitclass($data['unitclass']);
+        $personnage->setElement($element);
+        $personnage->setUnitclass($unit);
         $personnage->setRarity((int)$data['rarity']);
-        $personnage->setOrigin($data['origin']);
+        $personnage->setOrigin($origin);
         $personnage->setUrlImg($data['url_img']);
 
         $dao->updatePersonnage($personnage);
