@@ -10,6 +10,8 @@ use Models\OriginDAO;
 use Models\ElementDAO;
 use Models\UnitClassDAO;
 use League\Plates\Engine;
+use Helpers\Message;
+
 
 class AttributController
 {
@@ -26,13 +28,15 @@ class AttributController
         $this->unitClassDAO = new UnitClassDAO();
     }
 
-    public function displayAddAttribute(string $message = ""): void
+    public function displayAddAttribute($message = null): void
     {
         echo $this->templates->render("add-attribute", [
             "message" => $message,
             "gameName" => "Genshin Impact"
         ]);
     }
+
+
 
     public function addAttribute(string $type, string $name, string $url): void
     {
@@ -57,8 +61,9 @@ class AttributController
                 break;
 
             default:
-                $this->displayAddAttribute("❌ Type d'attribut invalide.");
+                $this->displayAddAttribute(new Message("Type d'attribut invalide.", Message::COLOR_ERROR, "Erreur"));
                 return;
+
         }
 
         // 🔍 Vérifier les doublons (même nom)
@@ -67,9 +72,10 @@ class AttributController
         });
 
         if (!empty($existing)) {
-            $this->displayAddAttribute("❌ Cet attribut existe déjà.");
+            $this->displayAddAttribute(new Message("Cet attribut existe déjà.", Message::COLOR_ERROR, "Doublon"));
             return;
         }
+
 
         // Création de l’objet
         switch ($type) {
@@ -91,7 +97,8 @@ class AttributController
         $persoDAO = new \Models\PersonnageDAO();
         echo $this->templates->render('home', [
             'gameName' => 'Genshin Impact',
-            'message' => $successMsg,
+            'message' => new Message($successMsg, Message::COLOR_SUCCESS, "Succès"),
             'listPersonnage' => $persoDAO->getAll()
         ]);
+
     }}

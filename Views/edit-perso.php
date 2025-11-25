@@ -12,8 +12,9 @@ if (!isset($perso)) {
 <h1 class="genshin-title">Modifier le personnage : <strong><?= $this->e($perso->getName()) ?></strong></h1>
 
 <?php if (!empty($message)): ?>
-    <div class="alert"><?= $this->e($message); ?></div>
+    <?= $this->insert('message', ['message' => $message]) ?>
 <?php endif; ?>
+
 
 <form method="post" action="index.php?action=edit-perso" class="form-genshin">
 

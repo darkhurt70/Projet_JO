@@ -1,8 +1,9 @@
 <?php $this->layout('template', ['title' => 'Genshin Collection', 'gameName' => $gameName]) ?>
 
-<?php if (!empty($message)) : ?>
-    <div class="alert"><?= $this->e($message); ?></div>
+<?php if (!empty($message)): ?>
+    <?= $this->insert('message', ['message' => $message]) ?>
 <?php endif; ?>
+
 <?php if (isset($_GET['message']) && $_GET['message'] === 'update-success'): ?>
     <div class="alert">✅ Personnage mis à jour avec succès</div>
 <?php endif; ?>

@@ -6,7 +6,17 @@ $this->layout('template', [
 
 ?>
 
+
 <h1 class="genshin-title">Ajouter un nouvel élément</h1>
+
+<?php if (isset($message) && $message instanceof \Helpers\Message): ?>
+    <div class="alert <?= $this->e($message->getColor()) ?>">
+        <strong><?= $this->e($message->getTitle()) ?> :</strong> <?= $this->e($message->getContent()) ?>
+    </div>
+<?php elseif (!empty($message)): ?>
+    <div class="alert"><?= $this->e($message) ?></div>
+<?php endif; ?>
+
 
 <form method="post" action="index.php?action=add-attribute" class="form-genshin">
 

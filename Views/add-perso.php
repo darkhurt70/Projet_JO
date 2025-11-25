@@ -10,8 +10,9 @@ $this->layout('template', [
 
 
 <?php if (!empty($message)): ?>
-    <div class="alert"><?= $this->e($message); ?></div>
+    <?= $this->insert('message', ['message' => $message]) ?>
 <?php endif; ?>
+
 
 <form method="post" action="index.php?action=add-perso" class="form-genshin">
 

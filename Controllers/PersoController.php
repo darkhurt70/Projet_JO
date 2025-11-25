@@ -4,6 +4,8 @@ namespace Controllers;
 
 use Models\Personnage;
 use League\Plates\Engine;
+use Helpers\Message;
+
 
 class PersoController
 {
@@ -43,12 +45,13 @@ class PersoController
         $success = $dao->deletePerso($id);
 
         $message = $success
-            ? "Le personnage avec l'ID $id a été supprimé ✅"
-            : "❌ Aucun personnage avec l'ID $id n’a été trouvé.";
+            ? new Message("Personnage supprimé avec succès ", Message::COLOR_SUCCESS, "Succès")
+            : new Message("Aucun personnage trouvé avec cet ID.", Message::COLOR_ERROR, "Erreur");
 
         echo $this->templates->render('home', [
             'listPersonnage' => $dao->getAll(),
-            'message' => $message
+            'message' => $message,
+            'gameName' => 'Genshin Impact'
         ]);
     }
 
@@ -85,15 +88,17 @@ class PersoController
             $dao->createPersonnage($personnage);
 
             // 4. Message + affichage
+            $message = new Message("Personnage ajouté avec succès ✅", Message::COLOR_SUCCESS, "Succès");
             echo $this->templates->render('home', [
-                'message' => "Personnage ajouté avec succès ✅",
+                'message' => $message,
                 'listPersonnage' => $dao->getAll(),
                 'gameName' => 'Genshin Impact'
             ]);
 
         } catch (\Exception $e) {
+            $message = new Message($e->getMessage(), essage::COLOR_ERROR, "Erreur");
             echo $this->templates->render('add-perso', [
-                'message' => "Erreur : " . $e->getMessage(),
+                'message' => $message,
                 'gameName' => 'Genshin Impact'
             ]);
         }
@@ -107,10 +112,10 @@ class PersoController
         if ($id !== null) {
             $success = $dao->deletePerso($id);
             $message = $success
-                ? "Personnage supprimé avec succès ✅"
-                : "Erreur : aucun personnage trouvé avec cet ID.";
+                ? new Message("Succès", "Personnage supprimé avec succès ✅", "green")
+                : new Message("Erreur", "Aucun personnage trouvé avec cet ID.", "red");
         } else {
-            $message = "Erreur : aucun identifiant fourni.";
+            $message = new Message("Erreur", "Aucun identifiant fourni.", "red");
         }
 
         echo $this->templates->render('home', [
@@ -155,10 +160,12 @@ class PersoController
 
         $dao->updatePersonnage($personnage);
 
+        $message = new Message("Personnage modifié avec succès ✅", Message::COLOR_SUCCESS, "Succès");
+
         echo $this->templates->render('home', [
             'listPersonnage' => $dao->getAll(),
             'gameName' => 'Genshin Impact',
-            'message' => "✅ Personnage mis à jour avec succès !"
+            'message' => $message
         ]);
     }
 
