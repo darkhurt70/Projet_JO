@@ -1,27 +1,27 @@
-<?php $this->layout('layout', ['title' => 'Ajouter un Attribut']) ?>
+<?php
+$this->layout('template', [
+        'title' => 'Ajouter un nouveau personnage',
+        'gameName' => $gameName
+]);
 
-<h2>Ajouter un nouvel attribut</h2>
+?>
 
-<?php if (!empty($message)) : ?>
-    <div class="alert"><?= $this->e($message); ?></div>
-<?php endif; ?>
+<h1 class="genshin-title">Ajouter un nouvel élément</h1>
 
-<form method="post" action="index.php?action=add-attribute" class="form-container">
+<form method="post" action="index.php?action=add-attribute" class="form-genshin">
 
     <label for="type">Type d'attribut :</label>
     <select name="type" id="type" required>
-        <option value="">-- Choisir un type --</option>
         <option value="origin">Origine</option>
         <option value="element">Élément</option>
         <option value="unitclass">Classe</option>
     </select>
 
     <label for="name">Nom :</label>
-    <input type="text" name="name" id="name" required>
+    <input type="text" name="name" required placeholder="Nom de l'attribut">
 
-    <label for="url">URL de l’image :</label>
-    <input type="url" name="url" id="url" required>
+    <label for="url_img">URL de l’image :</label>
+    <input type="url" name="url_img" required placeholder="https://exemple.com/image.jpg">
 
-    <br><br>
-    <button type="submit">Ajouter</button>
+    <button type="submit" class="btn-genshin">Ajouter </button>
 </form>

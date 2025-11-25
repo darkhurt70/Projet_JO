@@ -23,6 +23,7 @@ class PersoController
         echo $this->templates->render('add-perso', [
             'message' => $message,
             'listElements' => $elementDAO->getAll(),
+            'gameName' => 'Ajouter un personnage',
             'listOrigins' => $originDAO->getAll(),
             'listUnitClasses' => $unitclassDAO->getAll()
         ]);
@@ -31,7 +32,10 @@ class PersoController
 
     public function displayAddElement(): void
     {
-        echo $this->templates->render('add-element');
+
+        echo $this->templates->render('add-element', [
+            'gameName' => 'Genshin Impact'
+        ]);
     }
     public function deletePerso(string $id): void
     {
@@ -43,7 +47,6 @@ class PersoController
             : "❌ Aucun personnage avec l'ID $id n’a été trouvé.";
 
         echo $this->templates->render('home', [
-            'gameName' => 'Genshin Impact',
             'listPersonnage' => $dao->getAll(),
             'message' => $message
         ]);
@@ -84,12 +87,14 @@ class PersoController
             // 4. Message + affichage
             echo $this->templates->render('home', [
                 'message' => "Personnage ajouté avec succès ✅",
-                'listPersonnage' => $dao->getAll()
+                'listPersonnage' => $dao->getAll(),
+                'gameName' => 'Genshin Impact'
             ]);
 
         } catch (\Exception $e) {
             echo $this->templates->render('add-perso', [
-                'message' => "Erreur : " . $e->getMessage()
+                'message' => "Erreur : " . $e->getMessage(),
+                'gameName' => 'Genshin Impact'
             ]);
         }
     }
@@ -125,6 +130,7 @@ class PersoController
         echo $this->templates->render('edit-perso', [
             'message' => $message,
             'perso' => $perso,
+            'gameName' => 'Genshin Impact',
             'listElements' => $elementDAO->getAll(),
             'listOrigins' => $originDAO->getAll(),
             'listUnitClasses' => $unitclassDAO->getAll()

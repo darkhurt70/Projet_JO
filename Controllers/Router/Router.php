@@ -42,7 +42,6 @@ class Router
         $this->routeList["index"] = new RouteIndex($this->ctrlList["main"]);
         $this->routeList["add-perso"] = new RouteAddPerso($this->ctrlList["perso"]);
         $this->routeList["logs"] = new RouteLogs($this->ctrlList["main"]);
-        $this->routeList["add-perso-element"] = new RouteAddElement($this->ctrlList["perso"]);
         $this->routeList["login"] = new RouteLogin($this->ctrlList["main"]);
         $this->routeList["del-perso"] = new RouteDelPerso($this->ctrlList["perso"]);
         $this->routeList["edit-perso"] = new RouteEditPerso($this->ctrlList["perso"]);

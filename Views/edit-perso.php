@@ -9,13 +9,13 @@ if (!isset($perso)) {
 }
 ?>
 
-<h2>Modifier le personnage : <strong><?= $this->e($perso->getName()) ?></strong></h2>
+<h1 class="genshin-title">Modifier le personnage : <strong><?= $this->e($perso->getName()) ?></strong></h1>
 
 <?php if (!empty($message)): ?>
     <div class="alert"><?= $this->e($message); ?></div>
 <?php endif; ?>
 
-<form method="post" action="index.php?action=edit-perso" class="form-container">
+<form method="post" action="index.php?action=edit-perso" class="form-genshin">
 
     <!-- ID caché -->
     <input type="hidden" name="id" value="<?= $this->e($perso->getId()) ?>">
@@ -62,6 +62,5 @@ if (!isset($perso)) {
     <input type="url" name="perso-url" id="url" required
            value="<?= $this->e($perso->getUrlImg()) ?>">
 
-    <br><br>
-    <button type="submit">✅ Mettre à jour</button>
+    <button type="submit" class="btn-genshin">✅ Mettre à jour</button>
 </form>

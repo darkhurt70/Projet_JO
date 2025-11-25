@@ -1,7 +1,7 @@
 <?php
 $this->layout('template', [
         'title' => 'Ajouter un nouveau personnage',
-        'gameName' => 'Ajouter un nouveau personnage'
+        'gameName' => $gameName
 ]);
 
 

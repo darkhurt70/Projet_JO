@@ -29,38 +29,69 @@ class AttributController
     public function displayAddAttribute(string $message = ""): void
     {
         echo $this->templates->render("add-attribute", [
-            "message" => $message
+            "message" => $message,
+            "gameName" => "Genshin Impact"
         ]);
     }
 
     public function addAttribute(string $type, string $name, string $url): void
     {
-        $message = "";
+        $name = trim($name);
+        $url = trim($url);
 
+        // Récupération du DAO selon le type
         switch ($type) {
             case "origin":
-                $attribute = new Origin($name, $url);  // constructeur simple
-                $this->originDAO->create($attribute);
-                $message = "Origine ajoutée avec succès.";
+                $dao = $this->originDAO;
+                $successMsg = "Origine ajoutée avec succès.";
                 break;
 
             case "element":
-                $attribute = new Element($name, $url);
-                $this->elementDAO->create($attribute);
-                $message = "Élément ajouté avec succès.";
+                $dao = $this->elementDAO;
+                $successMsg = "Élément ajouté avec succès.";
                 break;
 
             case "unitclass":
-                $attribute = new UnitClass($name, $url);
-                $this->unitClassDAO->create($attribute);
-                $message = "Classe ajoutée avec succès.";
+                $dao = $this->unitClassDAO;
+                $successMsg = "Classe ajoutée avec succès.";
                 break;
 
             default:
-                $message = "Type d'attribut invalide.";
+                $this->displayAddAttribute("❌ Type d'attribut invalide.");
+                return;
         }
 
-        // Retour au formulaire avec un message
-        $this->displayAddAttribute($message);
-    }
-}
+        // 🔍 Vérifier les doublons (même nom)
+        $existing = array_filter($dao->getAll(), function ($item) use ($name) {
+            return strtolower($item->getName()) === strtolower($name);
+        });
+
+        if (!empty($existing)) {
+            $this->displayAddAttribute("❌ Cet attribut existe déjà.");
+            return;
+        }
+
+        // Création de l’objet
+        switch ($type) {
+            case "origin":
+                $attribute = new Origin($name, $url);
+                break;
+            case "element":
+                $attribute = new Element($name, $url);
+                break;
+            case "unitclass":
+                $attribute = new UnitClass($name, $url);
+                break;
+        }
+
+        // Sauvegarde
+        $dao->create($attribute);
+
+        // ⬅️ Retour vers home avec message
+        $persoDAO = new \Models\PersonnageDAO();
+        echo $this->templates->render('home', [
+            'gameName' => 'Genshin Impact',
+            'message' => $successMsg,
+            'listPersonnage' => $persoDAO->getAll()
+        ]);
+    }}
