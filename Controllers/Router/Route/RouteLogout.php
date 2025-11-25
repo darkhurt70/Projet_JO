@@ -5,7 +5,7 @@ namespace Controllers\Router\Route;
 use Controllers\LoginController;
 use Controllers\Router\Route;
 
-class RouteLogin extends Route
+class RouteLogout extends Route
 {
     private LoginController $controller;
 
@@ -16,11 +16,11 @@ class RouteLogin extends Route
 
     public function get(array $params = []): void
     {
-        $this->controller->showLoginForm();
+        $this->controller->logout();
     }
 
     public function post(array $params = []): void
     {
-        $this->controller->handleLogin($params);
+        $this->get($params);
     }
 }

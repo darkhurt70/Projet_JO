@@ -29,4 +29,10 @@ class User
     {
         return $this->hashPwd;
     }
+
+    public function verifyPassword(string $plainText): bool
+    {
+        return password_verify($plainText, $this->password);
+    }
+
 }

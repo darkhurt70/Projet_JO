@@ -5,24 +5,16 @@ namespace Models;
 use PDO;
 use PDOException;
 
-class UserDAO extends DAO
+class UserDAO extends BasePDODAO
 {
     public function getByUsername(string $username): ?User
     {
-        try {
-            $stmt = $this->pdo->prepare("SELECT * FROM USERS WHERE username = :username");
-            $stmt->execute(['username' => $username]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT * FROM user WHERE username = ?";
+        $stmt = $this->getDB()->prepare($sql); // ✅ Utiliser getDB()
+        $stmt->execute([$username]);
+        $data = $stmt->fetch();
 
-            if ($row) {
-                return new User($row['id'], $row['username'], $row['hash_pwd']);
-            }
-
-            return null;
-        } catch (PDOException $e) {
-            // Log possible
-            return null;
-        }
+        return $data ? new User($data['username'], $data['password']) : null;
     }
 
     public function insert(User $user): bool

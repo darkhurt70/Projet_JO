@@ -14,6 +14,8 @@ use Controllers\Router\Route\RouteLogin;
 use Controllers\Router\Route\RouteDelPerso;
 use Controllers\Router\Route\RouteEditPerso;
 use Controllers\Router\Route\RouteAddAttribute;
+use Controllers\Router\Route\RouteLogout;
+
 
 
 
@@ -37,6 +39,8 @@ class Router
         $this->ctrlList["perso"] = new PersoController();
         $this->ctrlList["attribut"] = new AttributController();
         $this->ctrlList["log"] = new \Controllers\LogController();
+        $this->ctrlList["login"] = new \Controllers\LoginController();
+
 
 
     }
@@ -45,17 +49,12 @@ class Router
     {
         $this->routeList["index"] = new RouteIndex($this->ctrlList["main"]);
         $this->routeList["add-perso"] = new RouteAddPerso($this->ctrlList["perso"]);
-        $this->routeList["login"] = new RouteLogin($this->ctrlList["main"]);
         $this->routeList["del-perso"] = new RouteDelPerso($this->ctrlList["perso"]);
         $this->routeList["edit-perso"] = new RouteEditPerso($this->ctrlList["perso"]);
         $this->routeList["add-attribute"] = new RouteAddAttribute($this->ctrlList["attribut"]);
         $this->routeList["logs"] = new RouteLogs($this->ctrlList["log"]);
-
-
-
-
-
-
+        $this->routeList["login"] = new RouteLogin($this->ctrlList["login"]);
+        $this->routeList["logout"] = new RouteLogout($this->ctrlList["login"]);
 
 
     }
