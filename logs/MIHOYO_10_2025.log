@@ -1,0 +1,14 @@
+[2025-10-25 15:27:50] [CREATE] [Origin] Ajout de l'attribut : test
+[2025-10-25 15:27:58] [CREATE] [Element] Ajout de l'attribut : testooo
+[2025-10-25 15:28:05] [CREATE] [Unitclass] Ajout de l'attribut : testoooo
+[2025-10-25 15:28:25] [CREATE] [Personnage] Ajout du personnage 'testim' (ID: 6925cb1937a45)
+[2025-10-25 15:28:44] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925cb1937a45
+[2025-10-25 15:28:46] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925bd8f915c7
+[2025-10-25 15:28:48] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925bcb649b8a
+[2025-10-25 15:28:50] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925a9a8be39b
+[2025-10-25 15:29:01] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925b969934f8
+[2025-10-25 15:29:02] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925b9cbb970b
+[2025-10-25 15:29:03] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925bb05cff80
+[2025-10-25 15:29:04] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925bc03c7510
+[2025-10-25 15:30:32] [CREATE] [Personnage] Ajout du personnage 'ouiii' (ID: 6925cb98a2630)
+[2025-10-25 15:30:32] [CREATE] [Personnage] Ajout du personnage 'ouaais je suis un log différent des autres' (ID: 6925cb98a2630)

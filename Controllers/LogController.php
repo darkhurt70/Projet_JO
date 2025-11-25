@@ -12,15 +12,7 @@ class LogController
     public function __construct()
     {
         $this->templates = new Engine(__DIR__ . '/../Views');
-        $this->logDir = __DIR__ . '/../logs';
-    }
-    private function getLogFiles(): array
-    {
-        if (!is_dir($this->logDir)) return [];
-
-        return array_filter(scandir($this->logDir), function ($file) {
-            return preg_match('/^MIHOYO_\d{2}_\d{4}\.log$/', $file);
-        });
+        $this->logDir = realpath(__DIR__ . '/../logs'); // 🔐 Sûr et absolu
     }
 
     public function displayLogs(): void
@@ -35,16 +27,16 @@ class LogController
 
     public function showLogContent(string $file): void
     {
-        $safeFile = basename($file);
-        $fullPath = $this->logDir . '/' . $safeFile;
+        $files = $this->getLogFiles(); // 📜 Reprend tous les fichiers
 
-        $content = file_exists($fullPath)
-            ? file_get_contents($fullPath)
-            : "Fichier introuvable.";
+        $safeFile = basename($file); // 🔐 évite les chemins relatifs dangereux
+        $fullPath = $this->logDir . DIRECTORY_SEPARATOR . $safeFile;
 
-        $files = array_filter(scandir($this->logDir), function ($file) {
-            return preg_match('/^MIHOYO_\d{2}_\d{4}\.log$/', $file);
-        });
+        if (!in_array($safeFile, $files)) {
+            $content = "Fichier introuvable ou invalide.";
+        } else {
+            $content = file_exists($fullPath) ? file_get_contents($fullPath) : "Fichier vide.";
+        }
 
         echo $this->templates->render('logs', [
             'logFiles' => $files,
@@ -54,4 +46,22 @@ class LogController
         ]);
     }
 
+    private function getLogFiles(): array
+    {
+        if (!is_dir($this->logDir)) {
+            return [];
+        }
+
+        $allFiles = scandir($this->logDir);
+        $logFiles = [];
+
+        foreach ($allFiles as $file) {
+            if (preg_match('/^MIHOYO_\d{2}_\d{4}\.log$/', $file)) {
+                $logFiles[] = $file;
+            }
+        }
+
+        sort($logFiles); // Optionnel : trie par ordre croissant
+        return $logFiles;
+    }
 }

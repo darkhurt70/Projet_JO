@@ -9,7 +9,7 @@ $this->layout('template', [
 <h1 class="genshin-title">📜 Journal des modifications</h1>
 
 <form method="get" action="index.php" class="form-genshin" style="margin-bottom: 20px;">
-    <input type="hidden" name="action" value="show-log">
+    <input type="hidden" name="action" value="logs">
 
     <label for="log-select">Sélectionner un mois :</label>
     <select name="file" id="log-select" class="input-genshin">

@@ -14,7 +14,7 @@ use Controllers\Router\Route\RouteLogin;
 use Controllers\Router\Route\RouteDelPerso;
 use Controllers\Router\Route\RouteEditPerso;
 use Controllers\Router\Route\RouteAddAttribute;
-use Controllers\Router\Route\RouteShowLog;
+
 
 
 
@@ -49,8 +49,8 @@ class Router
         $this->routeList["del-perso"] = new RouteDelPerso($this->ctrlList["perso"]);
         $this->routeList["edit-perso"] = new RouteEditPerso($this->ctrlList["perso"]);
         $this->routeList["add-attribute"] = new RouteAddAttribute($this->ctrlList["attribut"]);
-        $this->routeList["show-log"] = new \Controllers\Router\Route\RouteShowLog($this->ctrlList["log"]);
-        $this->routeList["logs"] = new RouteLogs($this->ctrlList["main"]);
+        $this->routeList["logs"] = new RouteLogs($this->ctrlList["log"]);
+
 
 
 

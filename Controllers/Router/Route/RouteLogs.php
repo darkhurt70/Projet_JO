@@ -1,26 +1,29 @@
 <?php
 
 namespace Controllers\Router\Route;
-
-use Controllers\MainController;
+use Controllers\LogController;
 use Controllers\Router\Route;
 
 class RouteLogs extends Route
 {
-    private MainController $controller;
+    private LogController $controller;
 
-    public function __construct(MainController $controller)
+    public function __construct(LogController $controller)
     {
         $this->controller = $controller;
     }
 
     public function get(array $params = [])
     {
-        return $this->controller->displayLogs();
+        if (!isset($params['file'])) {
+            $this->controller->displayLogs(); // Affiche juste la liste si aucun fichier n’est spécifié
+        } else {
+            $this->controller->showLogContent($params['file']);
+        }
     }
 
     public function post(array $params = [])
     {
-        // Rien à faire ici pour le moment
+        $this->get($params);
     }
 }
