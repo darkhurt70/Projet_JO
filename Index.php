@@ -3,6 +3,7 @@
 // Requires
 use Controllers\MainController;
 use League\Plates\Engine;
+use Controllers\Router\Router;
 require_once __DIR__ . '/Helpers/Psr4AutoloaderClass.php';
 require_once __DIR__ . '/Vendor/Plates/src/Engine.php';
 require_once __DIR__ . '/Controllers/MainController.php';
@@ -22,7 +23,7 @@ $loader->addNamespace('Config', __DIR__ . '/Config');
 $loader->addNamespace('Exceptions', __DIR__ . '/Exceptions');
 
 
-use Controllers\Router\Router;
+
 
 $router = new Router();
 $router->routing($_GET, $_POST);

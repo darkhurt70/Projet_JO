@@ -5,6 +5,8 @@ namespace Controllers;
 use Models\Personnage;
 use League\Plates\Engine;
 use Helpers\Message;
+use Helpers\Logger;
+
 
 
 class PersoController
@@ -44,9 +46,13 @@ class PersoController
         $dao = new \Models\PersonnageDAO();
         $success = $dao->deletePerso($id);
 
-        $message = $success
-            ? new Message("Personnage supprimé avec succès ", Message::COLOR_SUCCESS, "Succès")
-            : new Message("Aucun personnage trouvé avec cet ID.", Message::COLOR_ERROR, "Erreur");
+        if ($success) {
+            Logger::log('DELETE', 'Personnage', "Suppression du personnage avec l'ID : $id");
+            $message = new Message("Personnage supprimé avec succès ", Message::COLOR_SUCCESS, "Succès");
+        } else {
+            Logger::log('DELETE', 'Personnage', "Échec de la suppression : ID $id introuvable");
+            $message = new Message("Aucun personnage trouvé avec cet ID.", Message::COLOR_ERROR, "Erreur");
+        }
 
         echo $this->templates->render('home', [
             'listPersonnage' => $dao->getAll(),
@@ -86,6 +92,7 @@ class PersoController
 
             $dao = new \Models\PersonnageDAO();
             $dao->createPersonnage($personnage);
+            Logger::log('CREATE', 'Personnage', "Ajout du personnage '{$personnage->getName()}' (ID: $id)");
 
             // 4. Message + affichage
             $message = new Message("Personnage ajouté avec succès ✅", Message::COLOR_SUCCESS, "Succès");
@@ -107,22 +114,28 @@ class PersoController
     public function deletePersoAndIndex(?string $id = null): void
     {
         $dao = new \Models\PersonnageDAO();
-        $message = "";
 
         if ($id !== null) {
             $success = $dao->deletePerso($id);
-            $message = $success
-                ? new Message("Succès", "Personnage supprimé avec succès ✅", "green")
-                : new Message("Erreur", "Aucun personnage trouvé avec cet ID.", "red");
+            if ($success) {
+                Logger::log('DELETE', 'Personnage', "Suppression du personnage avec l'ID : $id");
+                $message = new Message("Personnage supprimé avec succès ✅", Message::COLOR_SUCCESS, "Succès");
+            } else {
+                Logger::log('DELETE', 'Personnage', "Échec de la suppression : ID $id introuvable");
+                $message = new Message("Aucun personnage trouvé avec cet ID.", Message::COLOR_ERROR, "Erreur");
+            }
         } else {
-            $message = new Message("Erreur", "Aucun identifiant fourni.", "red");
+            Logger::log('DELETE', 'Personnage', "Tentative de suppression échouée : aucun ID fourni");
+            $message = new Message("Aucun identifiant fourni.", Message::COLOR_ERROR, "Erreur");
         }
 
         echo $this->templates->render('home', [
             'message' => $message,
-            'listPersonnage' => $dao->getAll()
+            'listPersonnage' => $dao->getAll(),
+            'gameName' => 'Genshin Impact'
         ]);
     }
+
 
     public function displayEditPerso(?string $id = null, ?string $message = null): void
     {
@@ -159,6 +172,7 @@ class PersoController
         $personnage->setUrlImg($data['url_img']);
 
         $dao->updatePersonnage($personnage);
+        Logger::log('UPDATE', 'Personnage', "Modification du personnage '{$personnage->getName()}' (ID: {$personnage->getId()})");
 
         $message = new Message("Personnage modifié avec succès ✅", Message::COLOR_SUCCESS, "Succès");
 

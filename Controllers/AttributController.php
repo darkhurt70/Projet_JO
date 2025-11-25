@@ -11,6 +11,8 @@ use Models\ElementDAO;
 use Models\UnitClassDAO;
 use League\Plates\Engine;
 use Helpers\Message;
+use Helpers\Logger;
+
 
 
 class AttributController
@@ -72,9 +74,13 @@ class AttributController
         });
 
         if (!empty($existing)) {
+            Logger::log('CREATE', ucfirst($type), "Échec : doublon sur le nom '$name'");
             $this->displayAddAttribute(new Message("Cet attribut existe déjà.", Message::COLOR_ERROR, "Doublon"));
             return;
         }
+
+
+
 
 
         // Création de l’objet
@@ -92,6 +98,10 @@ class AttributController
 
         // Sauvegarde
         $dao->create($attribute);
+
+        // log
+        Logger::log('CREATE', ucfirst($type), "Ajout de l'attribut : $name");
+
 
         // ⬅️ Retour vers home avec message
         $persoDAO = new \Models\PersonnageDAO();

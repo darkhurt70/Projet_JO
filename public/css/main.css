@@ -325,4 +325,77 @@ nav {
 
 
 
+.log-container {
+    display: flex;
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 1100px;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.15);
+}
+
+.log-files {
+    flex: 1;
+}
+
+.log-files h2,
+.log-content h2 {
+    font-family: 'Cardo', serif;
+    color: #2ecc71;
+    margin-bottom: 15px;
+    border-bottom: 2px dashed #2ecc71;
+    padding-bottom: 5px;
+}
+
+.log-files ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.log-files li {
+    margin-bottom: 10px;
+}
+
+.log-link {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background: linear-gradient(to right, #f0fdfa, #e3fcef);
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+    transition: 0.3s;
+    border: 2px solid #2ecc71;
+}
+
+.log-link:hover {
+    background: linear-gradient(to right, #e3fcef, #b2dfdb);
+    color: #197841;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.25);
+}
+
+.log-content {
+    flex: 2;
+}
+
+.log-display {
+    background: #111;
+    color: #eee;
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.log-placeholder {
+    font-style: italic;
+    color: #555;
+}
 

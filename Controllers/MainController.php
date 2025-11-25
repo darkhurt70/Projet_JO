@@ -34,14 +34,25 @@ class MainController
 
     public function displayLogs(): void
     {
-        echo $this->templates->render('logs');
+        $file = $_GET['file'] ?? null;
+        $logFiles = \Helpers\Logger::listLogFiles();
+        $selectedFile = $file ?? end($logFiles); // Dernier fichier si aucun sélectionné
+        $logContent = $selectedFile ? \Helpers\Logger::readLogFile($selectedFile) : "Aucun fichier de log disponible.";
+
+        echo $this->templates->render('logs', [
+            'logFiles' => $logFiles,
+            'selectedFile' => $selectedFile,
+            'logContent' => $logContent
+        ]);
     }
+
 
 
     public function displayLogin(): void
     {
         echo $this->templates->render('login');
     }
+
 
 
 
