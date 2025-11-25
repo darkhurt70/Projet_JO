@@ -1,7 +1,4 @@
-CREATE DATABASE GENSHIN
-    DEFAULT CHARACTER SET = 'utf8mb4';
-
- DROP TABLE IF EXISTS personnage;
+DROP TABLE IF EXISTS personnage;
 DROP TABLE IF EXISTS unitclass;
 DROP TABLE IF EXISTS element;
 DROP TABLE IF EXISTS origin;
@@ -36,6 +33,16 @@ CREATE TABLE unitclass (
     name VARCHAR(100) NOT NULL,
     url_img VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE USERS (
+    id VARCHAR(255) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    hash_pwd VARCHAR(255) NOT NULL
+);
+
+INSERT INTO USERS (id, username, hash_pwd)
+VALUES ('6540fae154f12', 'admin', '$2y$10$xNbTdf4ogIX5oDixCcUOi.9PftzWBJP3ZydZbb4F9zBZrcX4WJdCG');
+
 
 
 

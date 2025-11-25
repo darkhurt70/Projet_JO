@@ -4,7 +4,7 @@ namespace Helpers;
 
 class Logger
 {
-    private static $logDir = __DIR__ . '/../../logs';
+    private static $logDir = __DIR__ . '/../logs';
 
     public static function log($action, $entity, $message)
     {
