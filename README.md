@@ -57,16 +57,18 @@ Installation
 
 3. Créer la base de données :
     - Ouvrir phpMyAdmin ou tout client MySQL
-    - Exécuter le fichier SQL : ScriptSQL/create_genshin.sql
+    - Exécuter le fichier SQL : ScriptSQL/create_db.sql
 
 
 4. Configurer la base de données :
-   créer et Modifier le fichier `Config/dev.ini` :
+   copier Config/dev_sample.ini et Modifier le fichier en `Config/dev.ini` :
 
-   [database]
-   dsn = "mysql:host=localhost;dbname=genshin;charset=utf8"
-   user = "root"
-   pass = ""
+```ini
+[database]
+dsn = "mysql:host=localhost;dbname=genshin;charset=utf8"
+user = "root"
+pass = ""
+```
 
 5. Lancer l'application :
    php -S localhost:8000 -t .
@@ -83,6 +85,6 @@ Informations complémentaires
 ------------------------------------------------------
 Auteur
 ------------------------------------------------------
-Développé par : Julien Onillon
-Établissement : Eseo
+Développé par : Julien Onillon  
+Établissement : Eseo  
 Année : 2025
