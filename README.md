@@ -39,7 +39,7 @@ Projet_JO/
 ├── Vendor/            → Plates     
 ├── Views/             → Fichiers HTML  
 ├── Index.php          → Point d'entrée principal   
-└── README.txt         → Ce fichier 
+└── README.md         → Ce fichier 
 
 ------------------------------------------------------
 Prérequis
