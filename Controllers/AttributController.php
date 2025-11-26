@@ -13,7 +13,9 @@ use League\Plates\Engine;
 use Helpers\Message;
 use Helpers\Logger;
 
-
+/**
+ * Contrôleur responsable de la gestion des attributs (Origin, Element, UnitClass).
+ */
 
 class AttributController
 {
@@ -22,6 +24,9 @@ class AttributController
     private ElementDAO $elementDAO;
     private UnitClassDAO $unitClassDAO;
 
+    /**
+     * Contrôleur responsable de la gestion des attributs (Origin, Element, UnitClass).
+     */
     public function __construct()
     {
         $this->templates = new Engine(__DIR__ . '/../Views');
@@ -29,7 +34,11 @@ class AttributController
         $this->elementDAO = new ElementDAO();
         $this->unitClassDAO = new UnitClassDAO();
     }
-
+    /**
+     * Affiche le formulaire d'ajout d'attributs.
+     *
+     * @param Message|null $message Message à afficher sur la page (succès, erreur...).
+     */
     public function displayAddAttribute($message = null): void
     {
         echo $this->templates->render("add-attribute", [
@@ -38,7 +47,13 @@ class AttributController
         ]);
     }
 
-
+    /**
+     * Gère l'ajout d'un nouvel attribut (Origin, Element ou UnitClass).
+     *
+     * @param string $type Le type d'attribut à ajouter (origin | element | unitclass)
+     * @param string $name Le nom de l'attribut
+     * @param string $url  L'URL de l'image associée à l'attribut
+     */
 
     public function addAttribute(string $type, string $name, string $url): void
     {
@@ -63,6 +78,7 @@ class AttributController
                 break;
 
             default:
+                // Type invalide → message d'erreur
                 $this->displayAddAttribute(new Message("Type d'attribut invalide.", Message::COLOR_ERROR, "Erreur"));
                 return;
 
@@ -83,7 +99,7 @@ class AttributController
 
 
 
-        // Création de l’objet
+        // Création de l'objet correspondant au type
         switch ($type) {
             case "origin":
                 $attribute = new Origin($name, $url);
@@ -96,14 +112,14 @@ class AttributController
                 break;
         }
 
-        // Sauvegarde
+        // Sauvegarde dans la BDD via le DAO
         $dao->create($attribute);
 
         // log
         Logger::log('CREATE', ucfirst($type), "Ajout de l'attribut : $name");
 
 
-        // ⬅️ Retour vers home avec message
+        // Affichage de la page d'accueil avec message de succès
         $persoDAO = new \Models\PersonnageDAO();
         echo $this->templates->render('home', [
             'gameName' => 'Genshin Impact',

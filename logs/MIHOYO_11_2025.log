@@ -12,3 +12,6 @@
 [2025-11-25 15:29:04] [DELETE] [Personnage] Suppression du personnage avec l'ID : 6925bc03c7510
 [2025-11-25 15:30:32] [CREATE] [Personnage] Ajout du personnage 'ouiii' (ID: 6925cb98a2630)
 [2025-11-25 17:16:37] [CREATE] [Personnage] Ajout du personnage 'Matthieu' (ID: 6925e475656d1)
+[2025-11-26 12:07:57] [CREATE] [Personnage] Ajout du personnage 'tout pour les logs' (ID: 6926ed9d65f47)
+[2025-11-26 13:22:34] [CREATE] [Personnage] Ajout du personnage 'teomarc' (ID: 6926ff1a4c16f)
+[2025-11-26 14:12:35] [UPDATE] [Personnage] Modification du personnage 'Yoimiya' (ID: perso002)
