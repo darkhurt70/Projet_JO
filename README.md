@@ -70,11 +70,7 @@ user = "root"
 pass = ""
 ```
 
-5. Lancer l'application :
-   php -S localhost:8000 -t .
-
-6. Accéder à l'application :
-   http://localhost:8000/index.php
+5. Lancer Index.php
 
 
 ------------------------------------------------------
