@@ -3,18 +3,7 @@ DROP TABLE IF EXISTS unitclass;
 DROP TABLE IF EXISTS element;
 DROP TABLE IF EXISTS origin;
 
-CREATE TABLE personnage (
-    id VARCHAR(50) PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    element INT NOT NULL,
-    unitclass INT NOT NULL,
-    origin INT NOT NULL,
-    rarity INT NOT NULL,
-    url_img VARCHAR(255) NOT NULL,
-    FOREIGN KEY (element) REFERENCES element(id) ON DELETE RESTRICT,
-    FOREIGN KEY (unitclass) REFERENCES unitclass(id) ON DELETE RESTRICT,
-    FOREIGN KEY (origin) REFERENCES origin(id) ON DELETE RESTRICT
-);
+
 
 CREATE TABLE element (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,6 +27,19 @@ CREATE TABLE USERS (
     id VARCHAR(255) PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     hash_pwd VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE personnage (
+                            id VARCHAR(50) PRIMARY KEY,
+                            name VARCHAR(100) NOT NULL,
+                            element INT NOT NULL,
+                            unitclass INT NOT NULL,
+                            origin INT NOT NULL,
+                            rarity INT NOT NULL,
+                            url_img VARCHAR(255) NOT NULL,
+                            FOREIGN KEY (element) REFERENCES element(id) ON DELETE RESTRICT,
+                            FOREIGN KEY (unitclass) REFERENCES unitclass(id) ON DELETE RESTRICT,
+                            FOREIGN KEY (origin) REFERENCES origin(id) ON DELETE RESTRICT
 );
 
 INSERT INTO USERS (id, username, hash_pwd)
